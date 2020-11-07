@@ -5,9 +5,12 @@ const helmet = require('helmet');
 const yup = require('yup');
 const { nanoid } = require('nanoid');
 const monk = require('monk');
+const bodyParser = require('body-parser');
+const app = express();
 require('dotenv').config();
 
-const app = express();
+app.use(bodyParser.urlencoded({ extended: true })); 
+app.set('view engine', 'ejs');
 
 const db = monk(process.env.MONGO_URI);
 db.then(() => {
@@ -44,12 +47,23 @@ app.get("/:id", async (req, res, next) => {
 });
 
 app.post('/url', async (req, res, next) => {
-    let { slug, url } = req.body;
+    let url = req.body.name;
+    if(url.startsWith('https') == false){
+        url = ('https://').concat(url);
+    }
+    console.log(url);
+    let slug = req.body.slug;
+    if(slug === ''){
+        slug = nanoid(5);
+        console.log('generated slug: ' +slug);
+    }
+    console.log(req.body);
     try{
         await schema.validate({
             slug,
             url,
         })
+        slug = req.body.slug;
         if(!slug){
             slug = nanoid(5);
         } else {
@@ -64,7 +78,15 @@ app.post('/url', async (req, res, next) => {
             slug,
         };
         const created = await urls.insert(newUrl);
-        res.json(created);
+        //res.json(created);
+        const name = created.url;
+        const alias = created.slug;
+        console.log(created.url);
+        console.log(created.slug);
+        res.render('confirm', {
+            name: name,
+            alias: alias
+        });
     } catch(error){
         next(error);
     }
@@ -76,10 +98,11 @@ app.use((error, req, res, next) => {
     } else {
         res.status(500);
     }
-    res.json({
-        message: error.message,
-        stack: process.env.NODE_ENV === 'production' ? 'works' : error.stack,
-    })
+    var message = error.message;
+    var stack= process.env.NODE_ENV === 'production' ? 'works' : error.stack;
+    res.render('404', { message: message});
+    console.log(message);
+    console.log(stack);
 });
 
 port = process.env.PORT || 3000;

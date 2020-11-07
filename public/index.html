@@ -5,7 +5,6 @@
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
   <head>
-    <script type="text/javascript" src="vue.js"></script>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Squee.zy</title>
@@ -20,6 +19,13 @@
   <body>
     <header>
       <h1>squee.zy - An URL Shortener</h1>
+      <form onsubmit="return false" method="POST" action="/url" id="form">
+         <!--<label for="url">URL</label>-->
+         <input placeholder="Enter URL" type="text" name="name"><br>
+         <!--<label for="slug">Alias</label>-->
+         <input placeholder="Enter Alias" type="text" name="slug"><br>
+         <input type="submit" value="Create" id="submit">
+      </form>
     </header>
   </body>
 </html>
