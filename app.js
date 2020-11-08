@@ -11,6 +11,7 @@ require('dotenv').config();
 
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/views'));
 
 const db = monk(process.env.MONGO_URI);
 db.then(() => {
@@ -37,7 +38,7 @@ app.get("/:id", async (req, res, next) => {
         if(url) {
             res.redirect(url.url);
         } else {
-            res.send('slug not found!'); //slug not found!
+            res.render('notfound'); //slug not found!
             console.log(`${slug} not found`); 
         }
     } catch(error){
@@ -69,7 +70,7 @@ app.post('/url', async (req, res, next) => {
         } else {
             const existing = await urls.findOne({ slug });
             if(existing){
-                throw new Error('Slug in use!');
+                throw new Error('Alias is already in use.');
             }  
         }
         slug = slug.toLowerCase();
