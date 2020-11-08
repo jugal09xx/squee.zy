@@ -18,6 +18,42 @@ header h1{
     margin-top: 5vh;
 }
 input{
-    width: 20%;
-    margin-top: 3vh;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    width: 80%;
+    margin-top: 5vh;
+    padding: 1.25vh;
+    border-radius: 5px;
+    border: 1px solid #0C1014;
+    outline: none;
+    font-size: 3vh;
+    transition: 0.3s ease-in-out;
+}
+input:hover{
+    border: 1px solid #2A4CF2;
+}
+#body{
+    margin: auto;
+    width: 100%;
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-flow: row;
+    justify-content: space-evenly;
+}
+#svg{
+    align-items: center;
+    text-align: center;
+    width: 50%;
+}
+#content{
+    text-align: center;
+    width: 50%;
+}
+#nav{
+    padding: 10px;
+    height: 10%;
+}
+#nav{
+
 }

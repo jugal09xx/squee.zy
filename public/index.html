@@ -17,15 +17,27 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header>
-      <h1>squee.zy - An URL Shortener</h1>
-      <form onsubmit="return false" method="POST" action="/url" id="form">
-         <!--<label for="url">URL</label>-->
-         <input placeholder="Enter URL" type="text" name="name"><br>
-         <!--<label for="slug">Alias</label>-->
-         <input placeholder="Enter Alias" type="text" name="slug"><br>
-         <input type="submit" value="Create" id="submit">
-      </form>
-    </header>
+    <div id="nav"> 
+      <h1 id="brand">Squee.zy</h1>
+    </div>
+    <div id="body">
+      <div id="svg">
+        <h1>Shorten URLs,</h1>
+        <h1>Make Life Easier.</h1>
+        <img src="landing.svg" width="400" height="400">
+      </div>
+      <div id="content">
+        <header>
+          <h1>Shorten URL</h1>
+          <form onsubmit="return false" method="POST" action="/url" id="form">
+             <!--<label for="url">URL</label>-->
+             <input placeholder="Enter URL" type="text" name="name"><br>
+             <!--<label for="slug">Alias</label>-->
+             <input placeholder="Enter Alias" type="text" name="slug"><br>
+             <input type="submit" value="Create" id="submit">
+          </form>
+        </header>
+      </div>
+    </div>
   </body>
 </html>
